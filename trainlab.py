@@ -23,3 +23,15 @@ def dataset(n=300, seed=7):
     return rows, labels
 
 
+def split(rows, labels, fraction=0.25, seed=11):
+    """Return paired training and held-out data, without overlap."""
+    if len(rows) != len(labels) or len(rows) < 2 or not 0 < fraction < 1:
+        raise ValueError("invalid paired data or test fraction")
+    order = list(range(len(rows)))
+    random.Random(seed).shuffle(order)
+    n = max(1, min(len(rows)-1, round(len(rows)*fraction)))
+    test, train = order[:n], order[n:]
+    return ([rows[i] for i in train], [labels[i] for i in train],
+            [rows[i] for i in test], [labels[i] for i in test])
+
+
