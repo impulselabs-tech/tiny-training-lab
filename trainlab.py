@@ -35,3 +35,15 @@ def split(rows, labels, fraction=0.25, seed=11):
             [rows[i] for i in test], [labels[i] for i in test])
 
 
+def validate(rows, labels=None):
+    """Reject empty, ragged, or nonfinite observations."""
+    if not rows or not rows[0]:
+        raise ValueError("nonempty observations required")
+    width = len(rows[0])
+    if any(len(r) != width or not all(math.isfinite(v) for v in r) for r in rows):
+        raise ValueError("finite rectangular data required")
+    if labels is not None and (len(labels) != len(rows) or any(y not in (0, 1) for y in labels)):
+        raise ValueError("one binary label per row required")
+    return width
+
+
