@@ -47,3 +47,10 @@ def validate(rows, labels=None):
     return width
 
 
+def predict(rows, weights, bias):
+    """Return class-one probabilities."""
+    if validate(rows) != len(weights) or not all(math.isfinite(v) for v in [*weights, bias]):
+        raise ValueError("invalid model parameters")
+    return [sigmoid(sum(w*x for w,x in zip(weights,row))+bias) for row in rows]
+
+
