@@ -54,3 +54,16 @@ def predict(rows, weights, bias):
     return [sigmoid(sum(w*x for w,x in zip(weights,row))+bias) for row in rows]
 
 
+def loss(labels, probabilities):
+    """Mean clipped binary cross entropy."""
+    if not labels or len(labels) != len(probabilities) or any(y not in (0,1) for y in labels):
+        raise ValueError("paired binary targets required")
+    if any(not math.isfinite(p) or not 0 <= p <= 1 for p in probabilities):
+        raise ValueError("probabilities must be finite and in [0,1]")
+    total = 0
+    for y,p in zip(labels, probabilities):
+        p = max(1e-15, min(1-1e-15,p))
+        total -= y*math.log(p)+(1-y)*math.log1p(-p)
+    return total/len(labels)
+
+
