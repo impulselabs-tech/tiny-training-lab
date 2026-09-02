@@ -67,3 +67,17 @@ def loss(labels, probabilities):
     return total/len(labels)
 
 
+def fit(rows, labels, epochs=300, rate=0.2):
+    """Full-batch gradient descent for logistic regression."""
+    width = validate(rows, labels)
+    if not isinstance(epochs,int) or epochs < 1 or not math.isfinite(rate) or rate <= 0:
+        raise ValueError("positive epochs and finite positive rate required")
+    weights, bias = [0.0]*width, 0.0
+    for _ in range(epochs):
+        errors = [p-y for p,y in zip(predict(rows,weights,bias),labels)]
+        gradients = [sum(e*r[j] for e,r in zip(errors,rows))/len(rows) for j in range(width)]
+        weights = [w-rate*g for w,g in zip(weights,gradients)]
+        bias -= rate*sum(errors)/len(rows)
+    return weights,bias
+
+
