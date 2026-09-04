@@ -81,3 +81,11 @@ def fit(rows, labels, epochs=300, rate=0.2):
     return weights,bias
 
 
+def accuracy(labels, probabilities, threshold=0.5):
+    """Report accuracy after thresholding; a tie is positive."""
+    loss(labels, probabilities)
+    if not math.isfinite(threshold) or not 0 <= threshold <= 1:
+        raise ValueError("threshold must be in [0,1]")
+    return sum(int(p >= threshold)==y for p,y in zip(probabilities,labels))/len(labels)
+
+
