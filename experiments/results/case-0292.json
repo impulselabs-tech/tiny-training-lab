@@ -1,0 +1,23 @@
+{
+  "case": 292,
+  "parameters": {
+    "dataset_seed": 11,
+    "split_seed": 112,
+    "samples": 300,
+    "epochs": 200,
+    "learning_rate": 0.1
+  },
+  "metrics": {
+    "train_loss": 0.1753759933630294,
+    "test_loss": 0.17381049502828338,
+    "train_accuracy": 0.9644444444444444,
+    "test_accuracy": 0.9733333333333334
+  },
+  "model": {
+    "weights": [
+      2.3580702380639855,
+      -1.1969262939170877
+    ],
+    "bias": -0.24122258260157006
+  }
+}
