@@ -44,3 +44,11 @@ class TrainingTests(unittest.TestCase):
         self.assertAlmostEqual(b,0.05)
 
 
+    def test_generalization(self):
+        rows,labels=lab.dataset(seed=5)
+        a,b,c,d=lab.split(rows,labels)
+        w,bias=lab.fit(a,b)
+        self.assertLess(lab.loss(b,lab.predict(a,w,bias)),math.log(2))
+        self.assertGreater(lab.accuracy(d,lab.predict(c,w,bias)),0.9)
+
+
