@@ -1,0 +1,6 @@
+{
+  "cases": 500,
+  "test_accuracy_min": 0.8666666666666667,
+  "test_accuracy_max": 1.0,
+  "test_accuracy_mean": 0.9592533333333333
+}
