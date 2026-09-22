@@ -20,3 +20,7 @@ python -m unittest discover -s tests -v
 Default output: [examples/default-result.json](examples/default-result.json).
 Tests cover analytical cases, validation, and end-to-end behavior.
 See [HISTORY.md](HISTORY.md) for how the retrospective timeline was assembled.
+
+## Parameter-grid experiments
+
+[500 reproducible runs](experiments/README.md) with per-case parameters, computed metrics, and an aggregate summary.
